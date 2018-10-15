@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.4 2015/05/24 13:55:43 i3enedek Exp $
+# $NetBSD: Makefile,v 1.5 2018/08/13 13:55:43 i3enedek, tmotyl Exp $
 
 DISTNAME=	torsocks
+PKGNAME=	torsocks-0
 CATEGORIES=	net security
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -8,13 +9,9 @@ HOMEPAGE=	https://gitweb.torproject.org/torsocks.git
 COMMENT=	Library to torify applications
 LICENSE=	gnu-gpl-v2
 
-
 GIT_REPOSITORIES=	master
 GIT_REPO.master=	https://git.torproject.org/torsocks.git
 GIT_MODULE.master=	torsocks
-
-
-DIST_SUBDIR=	torsocks
 
 USE_TOOLS+=	autoreconf autoconf automake
 GNU_CONFIGURE=	yes

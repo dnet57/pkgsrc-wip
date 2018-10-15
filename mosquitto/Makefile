@@ -22,10 +22,10 @@ USE_TOOLS+=	gmake
 post-extract:
 	${RM} ${WRKSRC}/config.mk
 
-CONF_FILES=	share/examples/mosquitto/pskfile.example \
-		share/examples/mosquitto/pwfile.example \
-		share/examples/mosquitto/mosquitto.conf \
-		share/examples/mosquitto/aclfile.example
+CONF_FILES=	${PREFIX}/share/examples/mosquitto/pskfile.example \
+		${PREFIX}/share/examples/mosquitto/pwfile.example \
+		${PREFIX}/share/examples/mosquitto/mosquitto.conf \
+		${PREFIX}/share/examples/mosquitto/aclfile.example
 
 SUBST_CLASSES+=			ldconfig
 
@@ -43,4 +43,5 @@ post-install:
 .include "../../devel/libuuid/buildlink3.mk"
 # ?needed
 .include "../../net/libcares/buildlink3.mk"
+.include "../../security/openssl/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

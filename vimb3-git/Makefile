@@ -14,7 +14,6 @@ GIT_REPOSITORIES=	vimb
 GIT_REPO.vimb=		git://github.com/fanglingsu/vimb.git
 WRKSRC=			${WRKDIR}/vimb
 
-NO_CONFIGURE=	yes
 USE_TOOLS+=	gmake pkg-config
 USE_LANGUAGES=	c99
 
@@ -25,6 +24,8 @@ EGDIR=		${PREFIX}/share/examples/vimb
 MAKE_FLAGS+=	EXAMPLEPREFIX="${DESTDIR}${EGDIR}"
 MAKE_FLAGS+=	MANPREFIX="${DESTDIR}${PREFIX}/${PKGMANDIR}"
 MAKE_FLAGS+=	RUNPREFIX="${PREFIX}"
+
+TEST_TARGET=	test
 
 # Avoid conflicts with www/vimb
 post-install:

@@ -4,7 +4,7 @@ PKGNAME=	luakit-0.0
 CATEGORIES=	www
 MASTER_SITES=	${MASTER_SITE_GITHUB:=luakit/}
 
-MAINTAINER=	pkgsrc-users@NetBSD.org
+MAINTAINER=	leot@NetBSD.org
 HOMEPAGE=	http://luakit.org/
 COMMENT=	Webkit based browser framework extensible by Lua
 LICENSE=	gnu-gpl-v3
@@ -27,12 +27,6 @@ BUILD_MAKE_FLAGS+=	${LUAKIT_MAKE_FLAGS}
 INSTALL_MAKE_FLAGS+=	${LUAKIT_MAKE_FLAGS}
 
 LUA_VERSIONS_ACCEPTED=	51
-
-SUBST_CLASSES+=		xdg-dirs
-SUBST_STAGE.xdg-dirs=	pre-configure
-SUBST_MESSAGE.xdg-dirs=	Add pkgsrc xdg-dirs to the search path.
-SUBST_FILES.xdg-dirs=	luah.c clib/xdg.c common/luautil.c
-SUBST_SED.xdg-dirs=	-e 's,@PKGSRCXDGPATH@,"${PREFIX}/etc/xdg",g'
 
 .include "../../lang/lua/luaversion.mk"
 
@@ -67,6 +61,7 @@ pre-install:
 
 .include "../../databases/sqlite3/buildlink3.mk"
 .include "../../lang/lua/buildlink3.mk"
+.include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../www/webkit-gtk/buildlink3.mk"
 .include "../../x11/gtk3/buildlink3.mk"
 .include "../../wip/mk/git-package.mk"
