@@ -1,7 +1,8 @@
 # $NetBSD$
 
-DISTNAME=	tor-0.3.4.7-rc
+DISTNAME=	tor-0.3.5.3-alpha
 PKGNAME=	${DISTNAME:S/tor/tordev/:S/-alpha//:S/-rc/rc0/}
+PKGREVISION=	1
 CATEGORIES=	net security
 MASTER_SITES=	http://www.torproject.org/dist/
 
@@ -20,8 +21,8 @@ CONFIGURE_ARGS+=	--program-suffix=-dev
 CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFBASEDIR}
 CONFIGURE_ARGS+=	--docdir=${PREFIX}/share/doc/tordev
 
-# one test failure in 0.3.0.10
-# https://trac.torproject.org/projects/tor/ticket/23250
+# one test failure in 0.3.5.3-alpha
+# https://trac.torproject.org/projects/tor/ticket/27948
 TEST_TARGET=		check
 
 TOR_USER?=		tordev
