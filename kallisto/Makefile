@@ -5,39 +5,33 @@
 #              Thu Oct 19 20:40:39 CDT 2017               #
 ###########################################################
 
-DISTNAME=	kallisto-${PORTVERSION}
+DISTNAME=	kallisto-${PV}
 CATEGORIES=	biology
 MASTER_SITES=	${MASTER_SITE_GITHUB:=pachterlab/}
 GITHUB_PROJECT=	kallisto
-GITHUB_TAG=	v${PORTVERSION}
+GITHUB_TAG=	v${PV}
 
 MAINTAINER=	bacon@NetBSD.org
 HOMEPAGE=	https://pachterlab.github.io/kallisto/about.html
 COMMENT=	Quantify abundances of transcripts from RNA-Seq data
-# Check this
 LICENSE=	2-clause-bsd
 
-# Test and change if necessary.
-# MAKE_JOBS_SAFE=	no
-
-# Just assuming C and C++: Adjust this!
 USE_LANGUAGES=	c c++
 USE_TOOLS+=	pax
 USE_CMAKE=	yes
 
-CXXFLAGS+=	-I${PREFIX}/include
+# CXXFLAGS+=	-I${PREFIX}/include
 
-PORTVERSION=	0.42.4
+PV=		0.44.0
 DATADIR=	${PREFIX}/share/kallisto
 
-# Specify which directories to create before install.
-# You should only need this if using your own install target.
 INSTALLATION_DIRS=	bin ${DATADIR}
 
 post-install:
 	${INSTALL_SCRIPT} ${FILESDIR}/kallisto-test ${DESTDIR}${PREFIX}/bin
 	cd ${WRKSRC} && pax -rw test ${DESTDIR}${DATADIR}
 
+.include "../../biology/htslib/buildlink3.mk"
 .include "../../devel/hdf5/buildlink3.mk"
 .include "../../archivers/szip/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"

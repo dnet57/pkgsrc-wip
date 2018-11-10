@@ -1,86 +1,8 @@
 $NetBSD$
 
---- lib/sanitizer_common/sanitizer_platform_limits_netbsd.cc.orig	2018-08-21 21:25:40.000000000 +0000
+--- lib/sanitizer_common/sanitizer_platform_limits_netbsd.cc.orig	2018-10-31 22:51:05.000000000 +0000
 +++ lib/sanitizer_common/sanitizer_platform_limits_netbsd.cc
-@@ -15,9 +15,15 @@
- #include "sanitizer_platform.h"
- 
- #if SANITIZER_NETBSD
-+
-+#define _KMEMUSER
-+#define RAY_DO_SIGLEV
-+
- #include <sys/param.h>
- #include <sys/types.h>
- 
-+#include <sys/sysctl.h>
-+
- #include <altq/altq.h>
- #include <altq/altq_afmap.h>
- #include <altq/altq_blue.h>
-@@ -87,7 +93,6 @@
- #include <sys/disk.h>
- #include <sys/disklabel.h>
- #include <sys/mount.h>
--#define RAY_DO_SIGLEV
- #include <dev/biovar.h>
- #include <dev/bluetooth/btdev.h>
- #include <dev/bluetooth/btsco.h>
-@@ -115,6 +120,9 @@
- #include <dev/vndvar.h>
- #include <dev/wscons/wsconsio.h>
- #include <dev/wscons/wsdisplay_usl_io.h>
-+#include <md2.h>
-+#include <md4.h>
-+#include <md5.h>
- #include <net/bpf.h>
- #include <net/if_atm.h>
- #include <net/if_gre.h>
-@@ -134,10 +142,12 @@
- #include <netinet6/nd6.h>
- #include <netnatm/natm.h>
- #include <netsmb/smb_dev.h>
-+#include <rmd160.h>
- #include <soundcard.h>
- #include <sys/agpio.h>
- #include <sys/ataio.h>
- #include <sys/audioio.h>
-+#include <sys/cdbr.h>
- #include <sys/cdio.h>
- #include <sys/chio.h>
- #include <sys/clockctl.h>
-@@ -173,6 +183,7 @@
- #include <sys/filio.h>
- #include <sys/ipc.h>
- #include <sys/mman.h>
-+#include <sys/module.h>
- #include <sys/mount.h>
- #include <sys/mqueue.h>
- #include <sys/msg.h>
-@@ -180,6 +191,8 @@
- #include <sys/ptrace.h>
- #include <sys/resource.h>
- #include <sys/sem.h>
-+#include <sys/sha1.h>
-+#include <sys/sha2.h>
- #include <sys/shm.h>
- #include <sys/signal.h>
- #include <sys/socket.h>
-@@ -202,8 +215,13 @@
- #include <utime.h>
- #include <utmp.h>
- #include <utmpx.h>
-+#include <vis.h>
- #include <wchar.h>
- #include <wordexp.h>
-+#include <ttyent.h>
-+
-+#include <fts.h>
-+#include <regex.h>
- 
- // Include these after system headers to avoid name clashes and ambiguities.
- #include "sanitizer_internal_defs.h"
-@@ -238,6 +256,10 @@ unsigned struct_rlimit_sz = sizeof(struc
+@@ -253,6 +253,10 @@ unsigned struct_rlimit_sz = sizeof(struc
  unsigned struct_timespec_sz = sizeof(struct timespec);
  unsigned struct_sembuf_sz = sizeof(struct sembuf);
  unsigned struct_kevent_sz = sizeof(struct kevent);
@@ -91,39 +13,7 @@ $NetBSD$
  unsigned struct_utimbuf_sz = sizeof(struct utimbuf);
  unsigned struct_itimerspec_sz = sizeof(struct itimerspec);
  unsigned struct_timex_sz = sizeof(struct timex);
-@@ -1451,14 +1473,14 @@ unsigned IOCTL_PPPIOCGMTU = PPPIOCGMTU;
- unsigned IOCTL_PPPIOCSMTU = PPPIOCSMTU;
- unsigned IOCTL_SIOCGPPPSTATS = SIOCGPPPSTATS;
- unsigned IOCTL_SIOCGPPPCSTATS = SIOCGPPPCSTATS;
--unsigned IOCTL_IOC_NPF_VERSION = IOC_NPF_VERSION;
--unsigned IOCTL_IOC_NPF_SWITCH = IOC_NPF_SWITCH;
--unsigned IOCTL_IOC_NPF_LOAD = IOC_NPF_LOAD;
--unsigned IOCTL_IOC_NPF_TABLE = IOC_NPF_TABLE;
--unsigned IOCTL_IOC_NPF_STATS = IOC_NPF_STATS;
--unsigned IOCTL_IOC_NPF_SAVE = IOC_NPF_SAVE;
--unsigned IOCTL_IOC_NPF_RULE = IOC_NPF_RULE;
--unsigned IOCTL_IOC_NPF_CONN_LOOKUP = IOC_NPF_CONN_LOOKUP;
-+//unsigned IOCTL_IOC_NPF_VERSION = IOC_NPF_VERSION;
-+//unsigned IOCTL_IOC_NPF_SWITCH = IOC_NPF_SWITCH;
-+//unsigned IOCTL_IOC_NPF_LOAD = IOC_NPF_LOAD;
-+//unsigned IOCTL_IOC_NPF_TABLE = IOC_NPF_TABLE;
-+//unsigned IOCTL_IOC_NPF_STATS = IOC_NPF_STATS;
-+//unsigned IOCTL_IOC_NPF_SAVE = IOC_NPF_SAVE;
-+//unsigned IOCTL_IOC_NPF_RULE = IOC_NPF_RULE;
-+//unsigned IOCTL_IOC_NPF_CONN_LOOKUP = IOC_NPF_CONN_LOOKUP;
- unsigned IOCTL_PPPOESETPARMS = PPPOESETPARMS;
- unsigned IOCTL_PPPOEGETPARMS = PPPOEGETPARMS;
- unsigned IOCTL_PPPOEGETSESSION = PPPOEGETSESSION;
-@@ -1804,8 +1826,6 @@ unsigned IOCTL_MTIOCSLOCATE = MTIOCSLOCA
- unsigned IOCTL_MTIOCHLOCATE = MTIOCHLOCATE;
- unsigned IOCTL_POWER_EVENT_RECVDICT = POWER_EVENT_RECVDICT;
- unsigned IOCTL_POWER_IOC_GET_TYPE = POWER_IOC_GET_TYPE;
--unsigned IOCTL_POWER_IOC_GET_TYPE_WITH_LOSSAGE =
--    POWER_IOC_GET_TYPE_WITH_LOSSAGE;
- unsigned IOCTL_RIOCGINFO = RIOCGINFO;
- unsigned IOCTL_RIOCSINFO = RIOCSINFO;
- unsigned IOCTL_RIOCSSRCH = RIOCSSRCH;
-@@ -2063,6 +2083,39 @@ unsigned IOCTL_SNDCTL_DSP_SILENCE = SNDC
+@@ -2090,6 +2094,39 @@ unsigned IOCTL_SNDCTL_DSP_SILENCE = SNDC
  
  const int si_SEGV_MAPERR = SEGV_MAPERR;
  const int si_SEGV_ACCERR = SEGV_ACCERR;
@@ -163,7 +53,7 @@ $NetBSD$
  }  // namespace __sanitizer
  
  using namespace __sanitizer;
-@@ -2224,4 +2277,10 @@ CHECK_SIZE_AND_OFFSET(group, gr_passwd);
+@@ -2251,4 +2288,10 @@ CHECK_SIZE_AND_OFFSET(group, gr_passwd);
  CHECK_SIZE_AND_OFFSET(group, gr_gid);
  CHECK_SIZE_AND_OFFSET(group, gr_mem);
  

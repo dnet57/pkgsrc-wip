@@ -1,7 +1,0 @@
-$NetBSD$
-
-SHA1 (vimb-3.2.0.tar.gz) = 92f2d5524de5df5916d20ea92151c05a74851172
-RMD160 (vimb-3.2.0.tar.gz) = fdb9d4aa25a909cda4718de6a563f1504c4935db
-SHA512 (vimb-3.2.0.tar.gz) = 4a2c02f5edabe087839009e352ae741e42a5c903c3b73a27d8936fc6cf83026af43453bb684e1f340ef1e332ca16eef188a38da84fc506d29c61f866f00f03a5
-Size (vimb-3.2.0.tar.gz) = 131034 bytes
-SHA1 (patch-src_Makefile) = 09a533bb7e819b82705208f0cd4dbfe3e59b6733
