@@ -5,6 +5,7 @@ bin/emacs
 bin/emacs-${PKGVERSION}
 bin/emacsclient
 bin/etags
+include/emacs-module.h
 info/ada-mode.info.gz
 info/auth.info.gz
 info/autotype.info.gz
@@ -1676,7 +1677,8 @@ share/emacs/${PKGVERSION}/lisp/emacs-lisp/nadvice.el.gz
 share/emacs/${PKGVERSION}/lisp/emacs-lisp/nadvice.elc
 share/emacs/${PKGVERSION}/lisp/emacs-lisp/package-x.el.gz
 share/emacs/${PKGVERSION}/lisp/emacs-lisp/package-x.elc
-share/emacs/${PKGVERSION}/lisp/emacs-lisp/package.el
+share/emacs/${PKGVERSION}/lisp/emacs-lisp/package.el.gz
+share/emacs/${PKGVERSION}/lisp/emacs-lisp/package.elc
 share/emacs/${PKGVERSION}/lisp/emacs-lisp/pcase.el.gz
 share/emacs/${PKGVERSION}/lisp/emacs-lisp/pcase.elc
 share/emacs/${PKGVERSION}/lisp/emacs-lisp/pp.el.gz
@@ -2716,6 +2718,8 @@ share/emacs/${PKGVERSION}/lisp/mpc.el.gz
 share/emacs/${PKGVERSION}/lisp/mpc.elc
 share/emacs/${PKGVERSION}/lisp/msb.el.gz
 share/emacs/${PKGVERSION}/lisp/msb.elc
+share/emacs/${PKGVERSION}/lisp/multifile.el.gz
+share/emacs/${PKGVERSION}/lisp/multifile.elc
 share/emacs/${PKGVERSION}/lisp/mwheel.el.gz
 share/emacs/${PKGVERSION}/lisp/mwheel.elc
 share/emacs/${PKGVERSION}/lisp/net/ange-ftp.el.gz
@@ -2843,6 +2847,8 @@ share/emacs/${PKGVERSION}/lisp/net/tramp-ftp.elc
 share/emacs/${PKGVERSION}/lisp/net/tramp-gvfs.el.gz
 share/emacs/${PKGVERSION}/lisp/net/tramp-gvfs.elc
 share/emacs/${PKGVERSION}/lisp/net/tramp-loaddefs.el
+share/emacs/${PKGVERSION}/lisp/net/tramp-rclone.el.gz
+share/emacs/${PKGVERSION}/lisp/net/tramp-rclone.elc
 share/emacs/${PKGVERSION}/lisp/net/tramp-sh.el.gz
 share/emacs/${PKGVERSION}/lisp/net/tramp-sh.elc
 share/emacs/${PKGVERSION}/lisp/net/tramp-smb.el.gz
