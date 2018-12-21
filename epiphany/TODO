@@ -1,2 +1,1 @@
-- Saw occasional core dumps and leaks.
-  Old webkit may be the problem?
+- Investigate why there is an high CPU usage (unlike other webkit-gtk browsers)
